@@ -15,12 +15,11 @@ class Student < ActiveRecord::Base
   has_many :classrooms, through: :classroom_students
 
   def self.search(student)
-    binding.pry
-    if student == ""
+   
+    if student == "" && student != "Roberta"
       @students = Student.all 
     else 
-      Student.where("name LIKE ?", "%#{student}%")
+      @student = Student.where("name LIKE ?", "%#{student}%")
     end
-    
   end 
 end
