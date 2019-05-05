@@ -21,7 +21,12 @@ class Student < ActiveRecord::Base
   end
 
   def self.search(name)
-    self.student_names.select {|n| n.downcase == name.downcase}
+    if name.present?
+      where('NAME like ?', "%#{name}%") 
+     # self.student_names.select {|n| n == name}
+    else
+      self.all
+    end
   end
 
 
